@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.letsup.habit.app.backend.dao.mapper.HabAppHabitBgmMapperExt">
+    <select id="getAll" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from  hab_app_habit_bgm where is_deleted='n' order by bgm_order;
+    </select>
+</mapper>

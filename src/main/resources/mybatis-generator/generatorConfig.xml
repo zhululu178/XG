@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!-- 在项目根目录下(pom.xml同级)打开命令行工具：mvn mybatis-generator:generate -->
+
+<generatorConfiguration>
+<!--    <classPathEntry location="D:\qtbigdata\m2\repository\mysql\mysql-connector-java\5.1.18\mysql-connector-java-5.1.18.jar" />-->
+    <!--    jb 电脑开发环境配置信息-->
+    <classPathEntry location="D:/maven_repo/mysql/mysql-connector-java/8.0.11/mysql-connector-java-8.0.11.jar" />
+    <context id="baseTradeTables" targetRuntime="MyBatis3">
+        <property name="useActualColumnNames" value="false"/>
+
+        <plugin type="com.alibaba.rock.dal.mybatis.generator.plugin.PaginationPlugin"/>
+        <plugin type="com.lllockkk.mbg.plugins.PrefixBaseColumnPlugin"/>
+
+        <!-- 数据库地址、用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://192.168.11.218:3306/habit_dev?serverTimezone=GMT%2B8" userId="root"
+                        password="123456">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- 后台生成 -->
+        <!-- model -->
+        <javaModelGenerator targetPackage="com.letsup.habit.app.backend.dao.entity"
+                            targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- Mapper映射 -->
+        <sqlMapGenerator targetPackage="mappers"
+                         targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!-- Mapper接口 -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.letsup.habit.app.backend.dao.mapper" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+<!--        <table tableName="hab_app_user" domainObjectName="HabAppUser"-->
+<!--                enableUpdateByExample="false" enableDeleteByExample="false">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+
+<!--        <table tableName="hab_app_family" domainObjectName="HabAppFamily"-->
+<!--               enableUpdateByExample="false" enableDeleteByExample="false">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="hab_app_role" domainObjectName="HabAppRole"-->
+<!--               enableUpdateByExample="false" enableDeleteByExample="false">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="hab_app_role_user_re" domainObjectName="HabAppRoleUserRe"-->
+<!--               enableUpdateByExample="false" enableDeleteByExample="false">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+        <!--<table tableName="hab_app_role_module_config_re" domainObjectName="HabAppRoleModuleConfigRe"-->
+               <!--enableUpdateByExample="false" enableDeleteByExample="false">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+        <!--<table tableName="hab_app_module_config" domainObjectName="HabAppModuleConfig"-->
+               <!--enableUpdateByExample="false" enableDeleteByExample="false">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+        <!--<table tableName="hab_app_module_config_path" domainObjectName="HabAppModuleConfigPath"-->
+               <!--enableUpdateByExample="false" enableDeleteByExample="false">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+
+        <!--<table tableName="hab_sms_message" domainObjectName="HabSmsMessage"-->
+                <!--enableUpdateByExample="false" enableDeleteByExample="false">-->
+        <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+
+        <!--<table tableName="hab_sms_template" domainObjectName="HabSmsTemplate"-->
+               <!--enableUpdateByExample="false" enableDeleteByExample="false">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+<!--        <table tableName="hab_app_family_member" domainObjectName="HabAppFamilyMember"-->
+<!--               enableUpdateByExample="false" enableDeleteByExample="false">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="hab_app_habit_topic" domainObjectName="HabAppHabitTopic"-->
+<!--               enableUpdateByExample="false" enableDeleteByExample="false">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="hab_app_habit_icon" domainObjectName="HabAppHabitIcon"-->
+<!--               enableUpdateByExample="false" enableDeleteByExample="false">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="hab_app_habit_class" domainObjectName="HabAppHabitClass"-->
+<!--               enableUpdateByExample="false" enableDeleteByExample="false">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="hab_app_habit_color" domainObjectName="HabAppHabitColor"-->
+<!--               enableUpdateByExample="false" enableDeleteByExample="false">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--            <table tableName="hab_app_habit_template" domainObjectName="HabAppHabitTemplate"-->
+<!--                   enableUpdateByExample="false" enableDeleteByExample="false">-->
+<!--                <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--            </table>-->
+<!--        <table tableName="hab_app_habit_template_tag" domainObjectName="HabAppHabitTemplateTag"-->
+<!--               enableUpdateByExample="false" enableDeleteByExample="false">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="hab_app_habit" domainObjectName="HabAppHabit"-->
+<!--               enableUpdateByExample="false" enableDeleteByExample="false">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="hab_app_habit_daily_record" domainObjectName="HabAppHabitDailyRecord"-->
+<!--               enableUpdateByExample="false" enableDeleteByExample="false">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="hab_app_habit_clockin_record" domainObjectName="HabAppHabitClockinRecord"-->
+<!--               enableUpdateByExample="false" enableDeleteByExample="false">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="hab_app_habit_log" domainObjectName="HabAppHabitLog"-->
+<!--               enableUpdateByExample="false" enableDeleteByExample="false">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="hab_app_habit_bgm" domainObjectName="HabAppHabitBgm"-->
+<!--               enableUpdateByExample="false" enableDeleteByExample="false">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+        <table tableName="hab_app_template_tag_re" domainObjectName="HabAppTemplateTagRe"
+               enableUpdateByExample="false" enableDeleteByExample="false">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+
+    </context>
+
+</generatorConfiguration>

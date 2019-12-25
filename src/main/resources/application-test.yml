@@ -1,0 +1,62 @@
+spring:
+  datasource:
+    url: jdbc:mysql://192.168.11.218:3306/habit?serverTimezone=GMT%2B8&useSSL=false&autoReconnect=true&failOverReadOnly=false
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    #配置监控统计拦截的filters，stat:监控统计、log4j：日志记录、wall：防御sql注入
+    #如果允许时报错  java.lang.ClassNotFoundException: org.apache.log4j.Priority
+    #则导入 log4j 依赖即可，Maven 地址： https://mvnrepository.com/artifact/log4j/log4j
+    filters: stat,wall,log4j
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+  mvc:
+    static-path-pattern: /**
+  redis: #redis配置信息
+    host: 192.168.11.218
+    port: 6379
+    database: 4
+    password:
+  rabbitmq: #配置rabbitMq 服务器
+    host: 192.168.11.218
+    port: 5672
+    username: admin
+    password: admin
+    listener:
+      simple:
+        acknowledge-mode: manual
+    directexchange:
+      name: directexchange_test
+    directbindingkey: direct_bindingkey_test
+    directqueue: direct_queue_test
+jwt:
+  secret: secret
+  expiration: 72000000000000
+  refreshsecret: secret
+  refreshexpiration: 720000000000
+  token: Authorization
+swagger2:
+  enable: true
+qn:
+  accessKey: xV38vOPKKsdPLh7STtzsaXSOUWWrkp-OVQPdpe8m
+  secretKey: 8H9kl3hdpS2LpTMJVXysxgVnvQJyJOG1MKf48saK
+  pub:
+    bucket1: qtbigdata-qfn-dev-pub-video-x-1
+    url:
+      prefix: http://testqnpubbuk.qtbigdata.com/
+sms:
+  server:
+    url: http://47.98.113.130:8011/asmx/smsservice.aspx?name=C00076&pwd=7HPJFQLT7A7JT7KOX0ELDGJLJPYF&stime=&type=pt&extno=

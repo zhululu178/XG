@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.letsup.habit.app.backend.dao.mapper.HabAppHabitMapperExt">
+    <resultMap id="HabitSimpleMap" type="com.letsup.habit.app.backend.vo.MemberHabitListVo">
+        <id column="habit_id" jdbcType="BIGINT" property="id" />
+        <result column="executor" jdbcType="BIGINT" property="executor" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="icon_url" jdbcType="VARCHAR" property="iconUrl" />
+        <result column="icon_color" jdbcType="VARCHAR" property="iconColor" />
+        <result column="stick_days" jdbcType="INTEGER" property="stickDays" />
+        <result column="sticked_days" jdbcType="INTEGER" property="stickedDays" />
+        <result column="daily_count" jdbcType="INTEGER" property="dailyCount" />
+        <result column="each_time" jdbcType="INTEGER" property="eachTime" />
+        <result column="type" jdbcType="VARCHAR" property="type" />
+        <result column="actual_daily_count" jdbcType="INTEGER" property="actualCount" />
+        <result column="member_name" jdbcType="VARCHAR" property="memberName" />
+        <result column="member_role" jdbcType="VARCHAR" property="memberRole" />
+    </resultMap>
+    <select id="getPageByCond" resultMap="HabitSimpleMap">
+        select h.id habit_id, h.executor, h.title, h.icon_url, h.icon_color, h.stick_days, h.sticked_days, h.daily_count, h.each_time, h.type, dr.actual_daily_count, m.`name` member_name, m.role member_role
+        from hab_app_habit h
+        left join (select habit_id, actual_daily_count from hab_app_habit_daily_record where is_deleted = 'n' and clockin_date = #{today} and family_id=#{familyId}) dr on h.id = dr.habit_id
+        inner join hab_app_family_member m on h.executor = m.id
+        where h.is_deleted='n' and m.is_deleted = 'n' and h.`status`=#{status} and h.family_id=#{familyId}
+        order by h.id
+        limit #{start},#{pageCount}
+    </select>
+
+    <select id="getFromTodayOnHabitByFamilyId" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from hab_app_habit where is_deleted='n' and family_id=#{familyId}
+        and (start_date is null or (start_date &lt;= #{today} and end_date &gt;= #{today}))
+    </select>
+
+    <select id="getBeforeTodayHabitByFamilyId" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from hab_app_habit where is_deleted='n' and family_id=#{familyId} and (start_date &lt;= #{yesterday} and end_date &gt;= #{yesterday})
+    </select>
+</mapper>

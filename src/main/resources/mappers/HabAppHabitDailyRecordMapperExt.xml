@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.letsup.habit.app.backend.dao.mapper.HabAppHabitDailyRecordMapperExt">
+    <resultMap id="HabitDailyBonusMap" type="com.letsup.habit.app.backend.vo.HabitDailyBonusVo">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="bonus" jdbcType="INTEGER" property="bonus" />
+    </resultMap>
+    <select id="getPageByCond" resultMap="HabitDailyBonusMap">
+        select id, bonus from hab_app_habit_daily_record where is_deleted = 'n' and bonus > 0 and executor = #{memberId}
+        order by gmt_create desc
+        limit #{start},#{pageCount}
+    </select>
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.letsup.habit.app.backend.dao.mapper.HabAppHabitTemplateMapperExt">
+    <resultMap id="TopGroupHabitTemplateMap" type="com.letsup.habit.app.backend.vo.HabitTemplateClassVo" >
+        <id column="name" property="name" jdbcType="VARCHAR" />
+        <!-- 一下是对A对象中B的属性的映射配置 -->
+        <collection property="templates" javaType="java.util.List" ofType="com.letsup.habit.app.backend.vo.HabitTemplateSimpleVo">
+            <id column="id" property="id" jdbcType="BIGINT"/>
+            <result column="title" property="title" jdbcType="VARCHAR"/>
+            <result column="icon_url" property="iconUrl" jdbcType="VARCHAR"/>
+            <result column="icon_color" property="iconColor" jdbcType="VARCHAR"/>
+            <result column="used_count" property="usedCount" jdbcType="BIGINT"/>
+        </collection>
+    </resultMap>
+    <select id="getByTopicId" resultMap="TopGroupHabitTemplateMap">
+        select ht.id, ht.title, ht.icon_url, ht.icon_color, ht.used_count, htg.name
+        from hab_app_habit_topic_group htg, hab_app_topic_group_habit_re tghr, hab_app_habit_template ht
+        where htg.id = tghr.topic_group_id and tghr.habit_template_id = ht.id and htg.is_deleted = 'n' and tghr.is_deleted = 'n' and ht.is_deleted = 'n'
+        and htg.topic_id = #{topicId}
+        order by htg.group_order, tghr.re_order
+    </select>
+
+    <select id="getByTags" resultMap="TopGroupHabitTemplateMap">
+        select distinct te.id, te.title, te.icon_url, te.icon_color, te.used_count, te.temp_order, c.name, c.class_order
+        from hab_app_habit_template_tag t, hab_app_template_tag_re r, hab_app_habit_template te, hab_app_habit_class c
+        where t.id = r.tag_id and r.template_id = te.id and te.class1 = c.id and t.is_deleted = 'n' and r.is_deleted = 'n' and te.is_deleted = 'n' and c.is_deleted = 'n'
+        <if test="tags">
+            and t.name in
+            <foreach close=")" collection="tags" item="tag" open="(" separator=",">
+                #{tag}
+            </foreach>
+        </if>
+        order by c.class_order, te.temp_order
+    </select>
+</mapper>

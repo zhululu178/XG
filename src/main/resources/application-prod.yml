@@ -1,0 +1,56 @@
+spring:
+  datasource:
+      url: jdbc:mysql://rm-bp1hpou5653x69zv690130.mysql.rds.aliyuncs.com/pae?serverTimezone=GMT%2B8&useSSL=false
+      username: hz_root
+      password: hz_root2019
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
+      connectionInitSqls: set names utf8mb4;
+  mvc:
+    static-path-pattern: /**
+  redis: #redis配置信息
+    host: 121.40.230.44
+    port: 6371
+    database: 0
+    password: pae_2019
+  rabbitmq:
+    host: 121.40.230.44
+    username: pae
+    password: pae_2019
+    port: 5672
+    listener:
+      retry:
+        enabled: true
+        max-attempts: 3
+file:
+  dir: /root/servers/pae/pae-app-backend/file
+sms:
+  server:
+    url: http://47.98.113.130:8011/asmx/smsservice.aspx?name=C00076&pwd=7HPJFQLT7A7JT7KOX0ELDGJLJPYF&stime=&type=pt&extno=
+weixin:
+  login:
+    url:  http://hzapp.zan99.com/app/weixin/login
+    backUrl: http://hzapp.zan99.com/app/weixin/callback
+  downUrl: http://hzweb.zan99.com/hongbao
+  errorUrl: http://hzweb.zan99.com/errorUrl
+  gongzhong:
+    app:
+      id: wxe64ff402267bf387
+      secret: 6cbd528343a1a3464833d39503336ce4
+  app:
+    id: wx7acd6111cb522fb5
+    secret: 4affc8c1f28abcd55e6441e27e5b3495
+    mchId: 1551901971
+    certPath: /root/servers/pae/pae-app-backend/1551901971_20190826_cert/apiclient_cert.p12
+  api:
+    key: kHgMgW4E5dB5KuyEtKFrre5Rik4wncmK
+qn:
+  accessKey:  xV38vOPKKsdPLh7STtzsaXSOUWWrkp-OVQPdpe8m
+  secretKey: 8H9kl3hdpS2LpTMJVXysxgVnvQJyJOG1MKf48saK
+  pub:
+    bucket1: qtbigdata-prod-pub-1
+    url:
+      prefix: http://qnpubbuk.qtbigdata.com/
+cashout:
+  scope: 30,50,100,150,200,500
+  coinRatio: 120000
